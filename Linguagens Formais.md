@@ -218,7 +218,7 @@ Lê-se:
 
 
 
-> **⚠️ Atenção:** o símbolo `→` possui significados diferentes dependendo do seu contexto. Em lógica, significa **implicação**. Em gramáticas, normalmente significa **produção/geração**.
+> **⚠️ Atenção:** o símbolo `→` possui significados diferentes dependendo do contexto. Em lógica, significa **implicação**. Em gramáticas, normalmente significa **produção/geração**.
 
 
 
