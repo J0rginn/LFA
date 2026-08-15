@@ -1940,7 +1940,7 @@ Antes de avançar para a próxima aula, verifique se você consegue explicar:
 
 
 
-### 📚 Aula 1 concluída
+### 📚 Aula 1 concluída ✓
 
 
 
