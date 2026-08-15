@@ -1885,7 +1885,7 @@ Antes de avançar para a próxima aula, verifique se você consegue explicar:
 
 
 * [X]  O que é um **alfabeto `Σ`**;
-conjunto finito e não vazio de símbolos (ex.: Σ = {0, 1}), usados como unidades básicas para formar cadeias.
+
 * [x] O que é uma **cadeia**;
 
 * [x] O que significa **`ε`**;
