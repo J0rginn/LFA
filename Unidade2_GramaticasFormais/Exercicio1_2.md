@@ -331,12 +331,12 @@ $$
 
 Determine se as afirmações são **verdadeiras ou falsas**:
 
-1. $0 \in \Sigma$
-2. $1 \in \Sigma$
-3. $01 \in \Sigma$
-4. $01 \in \Sigma^*$
-5. $2 \in \Sigma$
-6. $101 \in \Sigma^*$
+1. $0 \in \Sigma$**Verdadeiro** (0 é um símbolo do alfabeto)
+2. $1 \in \Sigma$**Verdadeiro** (1 é um símbolo do alfabeto)
+3. $01 \in \Sigma$**Falso** (01 é uma palavra com dois símbolos, não um símbolo isolado)
+4. $01 \in \Sigma^*$**Verdadeiro** (01 é uma palavra formada por símbolos de Σ)
+5. $2 \in \Sigma$**Falso** (2 não pertence ao alfabeto {0,1})
+6. $101 \in \Sigma^*$**Verdadeiro** (101 é uma palavra formada por símbolos de Σ)
 
 Justifique cada resposta.
 
@@ -442,12 +442,12 @@ $$
 
 Determine se cada palavra pertence à linguagem:
 
-1. $0 \in L$
-2. $01 \in L$
-3. $0111 \in L$
-4. $10 \in L$
-5. $111 \in L$
-6. $011 \in L$
+1. $0 \in L$ Verdadeiro
+2. $01 \in L$ Verdadeiro
+3. $0111 \in L$ Verdadeiro
+4. $10 \in L$ Falso
+5. $111 \in L$ Falso
+6. $011 \in L$ Verdadeiro
 
 ---
 
