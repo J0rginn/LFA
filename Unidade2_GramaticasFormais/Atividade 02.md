@@ -331,14 +331,20 @@ $$
 
 Determine se as afirmações são **verdadeiras ou falsas**:
 
-1. $0 \in \Sigma$
-2. $1 \in \Sigma$
+1. $0 \in \Sigma$ 
+2. $1 \in \Sigma$ 
 3. $01 \in \Sigma$
 4. $01 \in \Sigma^*$
 5. $2 \in \Sigma$
 6. $101 \in \Sigma^*$
 
 Justifique cada resposta.
+0 ∈ Σ	(V)	0 é um símbolo do alfabeto
+1 ∈ Σ	(V)	1 é um símbolo do alfabeto
+01 ∈ Σ	F()	01 tem dois símbolos, logo é uma palavra, não um símbolo isolado
+01 ∈ Σ*	(V)	Σ* contém todas as palavras formadas com símbolos de Σ
+2 ∈ Σ	(F)	2 não faz parte do alfabeto {0,1}
+101 ∈ Σ*	(V)	é uma palavra formada só com símbolos de Σ
 
 ---
 
@@ -442,12 +448,12 @@ $$
 
 Determine se cada palavra pertence à linguagem:
 
-1. $0 \in L$
-2. $01 \in L$
-3. $0111 \in L$
-4. $10 \in L$
-5. $111 \in L$
-6. $011 \in L$
+1. $0 \in L$ - 0 ∈ L → V (aparece no conjunto)
+2. $01 \in L$ - 01 ∈ L → V 
+3. $0111 \in L$ - 0111 ∈ L → V
+4. $10 \in L$ - 10 ∈ L → F (não está listada)
+5. $111 \in L$ - 111 ∈ L → F (não está listada)
+6. $011 \in L$ - 011 ∈ L → V
 
 ---
 
@@ -551,9 +557,13 @@ L = {b^n \mid n \geq 1}
 $$
 
 1. Escreva as cinco primeiras palavras.
+b, bb, bbb, bbbb, bbbbb
 2. Explique o significado de $b^n$.
+n ocorrências seguidas do símbolo b
 3. A palavra `bbbbbb` pertence à linguagem?
+bbbbbb ∈ L? Sim, pois é b⁶ (n=6 ≥ 1)
 4. A palavra vazia ($\varepsilon$) pertence à linguagem?
+ε ∈ L? Não, pois n≥1 exige pelo menos uma ocorrência de b; ε tem zero símbolos
 
 ---
 
@@ -657,9 +667,9 @@ $$
 
 Depois responda:
 
-1. Qual delas possui uma palavra?
-2. Qual delas não possui nenhuma palavra?
-3. Qual é o comprimento da palavra $\varepsilon$?
+1. Qual delas possui uma palavra? B, pois {ε} tem exatamente 1 elemento (a palavra ε)
+2. Qual delas não possui nenhuma palavra? A, pois ∅ é o conjunto vazio
+3. Qual é o comprimento da palavra $\varepsilon$? 0 (zero símbolos)
 
 ---
 
@@ -765,11 +775,11 @@ $$
 
 Identifique:
 
-1. O conjunto de variáveis.
-2. O conjunto de terminais.
-3. O conjunto de produções.
-4. O símbolo inicial.
-5. Qual palavra pode ser gerada por essa gramática?
+1. O conjunto de variáveis. - V = {S, A}
+2. O conjunto de terminais. - T = {0, 1}
+3. O conjunto de produções. - P = {S → 0A, A → 1}
+4. O símbolo inicial. - S
+5. Qual palavra pode ser gerada por essa gramática? - S ⇒ 0A ⇒ 01, portanto a única palavra gerável é "01"
 
 ---
 
@@ -866,9 +876,13 @@ $$
 Começando com $S$:
 
 1. Aplique a regra uma vez.
+Aplicando 1 vez: S ⇒ 0S
 2. Aplique a regra duas vezes.
+Aplicando 2 vezes: S ⇒ 0S ⇒ 00S
 3. Aplique a regra três vezes.
+Aplicando 3 vezes: S ⇒ 0S ⇒ 00S ⇒ 000S
 4. Escreva a sequência completa de derivação.
+Sequência completa: S ⇒ 0S ⇒ 00S ⇒ 000S
 
 ---
 
@@ -1011,6 +1025,13 @@ aaab
 $$
 
 **Escreva todos os passos da derivação.**
+Gramática: S → aS | S → b. Gerar aaab:
+
+Passo 1: S
+Passo 2: S ⇒ aS
+Passo 3: aS ⇒ aaS
+Passo 4: aaS ⇒ aaaS
+Passo 5: aaaS ⇒ aaab (aplicando S → b)
 
 ---
 
@@ -1170,6 +1191,14 @@ Determine se cada palavra pode ser gerada:
 6. `1001`
 
 Para as palavras que podem ser geradas, apresente a derivação completa.
+| Palavra | Pertence a L(G)? | Derivação |
+| --------- | ------- | ------------- |
+| `1`     |   sim   | S ⇒ 1  |
+| `01`    |   Sim   | S ⇒ 0S ⇒ 01 |
+| `001`     |   Sim   | S ⇒ 0S ⇒ 00S ⇒ 001|
+| `0001`     |   sim   | após aplicar S→1 a derivação termina; não é possível ter um 0 depois de um 1 |
+| `101`     |   não   | Simbolo 'a' não existe no alfabeto |
+| `1001`     |   não   | não segue o padrão 0ⁿ1 (tem símbolos fora de ordem) |
 
 ---
 
