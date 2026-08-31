@@ -1686,7 +1686,7 @@ A palavra `1001` começa com `1` e depois possui outros símbolos, o que não é
 
 ---
 
-# Resumo dos conceitos
+# Resumo dos conceitos ✓
 
 | Conceito           | Significado                                                           |
 | ------------------ | --------------------------------------------------------------------- |
