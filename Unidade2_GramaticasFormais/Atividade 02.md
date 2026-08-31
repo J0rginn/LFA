@@ -9,7 +9,7 @@
 
 ---
 
-# 1. Alfabeto
+# 1. Alfabeto.
 
 ## Exercício comentado
 
