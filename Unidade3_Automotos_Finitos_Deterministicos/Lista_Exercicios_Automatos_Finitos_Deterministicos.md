@@ -80,7 +80,7 @@ Complete a tabela:
 | Aberto | nenhuma_pessoa | Fechado |
 
 Depois, desenhe o diagrama de estados correspondente e indique o estado inicial.
-![Diagrama de estados](Unidade3_Automotos_Finitos_Deterministicos/Diagrama_de_Estado_Porta.drawio.png)
+![Diagrama de estados](Images/Diagrama_Porta.png)
 
 
 
