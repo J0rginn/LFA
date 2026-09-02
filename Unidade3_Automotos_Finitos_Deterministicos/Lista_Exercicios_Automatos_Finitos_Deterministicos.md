@@ -11,12 +11,13 @@
 
 | Campo | Preenchimento |
 |---|---|
-| Turma | |
-| Data | |
-| Integrante 1 | |
-| Integrante 2 | |
-| Integrante 3 | |
-| Integrante 4 | |
+| Turma | N1 |
+| Data | 01/09/2026 |
+| Integrante 1 | Jorge Henrique Souza Santos Cardoso |
+| Integrante 2 | Guilherme Silva do Nascimento |
+| Integrante 3 | Paulo Vinicius da Silva Lima dos Santos |
+| Integrante 4 | Mauricio Marques Lopes Pereira Lima |
+| Integrante 5 | Arthur Gomes Thomaz de Magalhães |
 
 ## Orientações
 
@@ -41,12 +42,25 @@ Ligado    --pressionar--> Desligado
 
 Responda:
 
-1. Quantos estados existem?
+1. Quantos estados existem?  
+  -2 estados.
+  
 2. Qual é o estado inicial, considerando que a lâmpada começa apagada?
+  -Desligado.
+  
 3. Qual entrada provoca uma transição?
+  - Pressionar.
+
 4. Partindo de `Desligado`, qual será o estado após um acionamento?
+  -Ligado.
+
 5. Partindo de `Desligado`, qual será o estado após dois acionamentos?
+  -Desligado.
+
 6. Explique o funcionamento do sistema com suas palavras.
+  - O sistema mostra o ciclo de uma lâmpada acionada por um interruptor, em que geralmente começa em estado desligado, ao pressionar o interruptor a lâmpada fica em estado de ligado.
+    Se pressionado novamente sai do estado de ligado para  o estado de desligado.
+  
 
 ## Exercício 2 — Porta automática
 
@@ -56,10 +70,10 @@ Complete a tabela:
 
 | Estado atual | Entrada | Próximo estado |
 |---|---|---|
-| Fechado | pessoa_detectada | |
-| Fechado | nenhuma_pessoa | |
-| Aberto | pessoa_detectada | |
-| Aberto | nenhuma_pessoa | |
+| Fechado | pessoa_detectada | Aberta |
+| Fechado | nenhuma_pessoa | Fechado |
+| Aberto | pessoa_detectada | Aberto |
+| Aberto | nenhuma_pessoa | Fechado |
 
 Depois, desenhe o diagrama de estados correspondente e indique o estado inicial.
 
