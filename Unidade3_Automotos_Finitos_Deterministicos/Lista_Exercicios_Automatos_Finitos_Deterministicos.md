@@ -43,19 +43,23 @@ Ligado    --pressionar--> Desligado
 Responda:
 
 1. Quantos estados existem?  
-  -2 estados.
+  - 2 estados.
   
 2. Qual é o estado inicial, considerando que a lâmpada começa apagada?
-  -Desligado.
+ 
+  - Desligado.
   
 3. Qual entrada provoca uma transição?
+ 
   - Pressionar.
 
 4. Partindo de `Desligado`, qual será o estado após um acionamento?
-  -Ligado.
+
+  - Ligado.
 
 5. Partindo de `Desligado`, qual será o estado após dois acionamentos?
-  -Desligado.
+
+  - Desligado.
 
 6. Explique o funcionamento do sistema com suas palavras.
   - O sistema mostra o ciclo de uma lâmpada acionada por um interruptor, em que geralmente começa em estado desligado, ao pressionar o interruptor a lâmpada fica em estado de ligado.
@@ -76,6 +80,10 @@ Complete a tabela:
 | Aberto | nenhuma_pessoa | Fechado |
 
 Depois, desenhe o diagrama de estados correspondente e indique o estado inicial.
+![Diagrama de estados](LFA/Unidade3_Automotos_Finitos_Deterministicos/Diagrama_de_Estado_Porta.drawio)
+
+
+
 
 ---
 
