@@ -120,11 +120,11 @@ Complete:
 
 | Elemento | Significado |
 |---|---|
-| `Σ` | |
-| `Q` | |
-| `δ` | |
-| `q0` | |
-| `F` | |
+| `Σ` |Alfabeto de entrada — conjunto finito de símbolos que a máquina pode ler |
+| `Q` |Conjunto finito de estados do autômato |
+| `δ` |Função de transição — define para cada estado e símbolo de entrada, qual é o próximo estado (δ: Q × Σ → Q) |
+| `q0` |Estado inicial — o estado em que o autômato começa (q0 ∈ Q) |
+| `F` | Conjunto de estados finais (ou de aceitação) — subconjunto de Q (F ⊆ Q) que determina se a cadeia é aceita|
 
 Explique por que esses cinco elementos são suficientes para definir o funcionamento de um AFD.
 
