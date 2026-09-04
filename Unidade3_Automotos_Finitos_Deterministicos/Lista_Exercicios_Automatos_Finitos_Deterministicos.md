@@ -145,12 +145,18 @@ Considere `Σ = {0,1}`, `Q = {q0,q1,q2}`, estado inicial `q0`, `F = {q1}` e:
 Responda:
 
 1. Qual é o resultado de `δ(q0,0)`?
+δ(q0,0) = q0
 2. Qual é o resultado de `δ(q0,1)`?
+δ(q0,1) = q1
 3. Qual é o resultado de `δ(q1,0)`?
+δ(q1,0) = q2
 4. Qual é o resultado de `δ(q2,1)`?
+δ(q2,1) = q1
 5. Qual é o estado de aceitação?
+O estado de aceitação é q1 (pois F = {q1})
 6. Desenhe o diagrama correspondente à tabela.
 7. Justifique por que o autômato é determinístico.
+O autômato é determinístico porque, para cada par (estado, símbolo), a função δ retorna exatamente um único estado de destino — nunca zero, nunca mais de um.
 
 ## Exercício 6 — Aceita ou rejeita?
 
