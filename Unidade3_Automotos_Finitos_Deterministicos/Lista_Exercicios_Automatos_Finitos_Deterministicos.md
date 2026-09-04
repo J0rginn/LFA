@@ -146,7 +146,7 @@ Responda:
 
 1. Qual é o resultado de `δ(q0,0)`?
    
--δ(q0,0) = q0
+ - δ(q0,0) = q0
 
 2. Qual é o resultado de `δ(q0,1)`?
 
