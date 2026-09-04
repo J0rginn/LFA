@@ -156,6 +156,7 @@ Responda:
 O estado de aceitação é q1 (pois F = {q1})
 6. Desenhe o diagrama correspondente à tabela.
 7. Justifique por que o autômato é determinístico.
+
 O autômato é determinístico porque, para cada par (estado, símbolo), a função δ retorna exatamente um único estado de destino — nunca zero, nunca mais de um.
 
 ## Exercício 6 — Aceita ou rejeita?
