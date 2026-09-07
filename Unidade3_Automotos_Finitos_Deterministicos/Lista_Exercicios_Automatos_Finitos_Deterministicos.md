@@ -138,9 +138,13 @@ Explique por que esses cinco elementos são suficientes para definir o funcionam
 Esses cinco componentes bastam porque, juntos, eles descrevem completamente e sem ambiguidade o comportamento do autômato:
 
 Σ diz o que pode ser lido.
+
 Q diz onde o autômato pode estar.
+
 δ diz como ele se move de um estado para outro.
+
 q0 diz por onde começar.
+
 F diz quando aceitar o resultado.
 
 Juntando tudo isso, é possível simular o autômato do início ao fim para qualquer cadeia: começa em q0, vai seguindo δ conforme lê cada símbolo, e no final só olha se parou em um estado de F. Não falta nenhuma informação  por isso os 5 elementos são suficientes.
