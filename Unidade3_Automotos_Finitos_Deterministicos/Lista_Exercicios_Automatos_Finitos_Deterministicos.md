@@ -100,13 +100,20 @@ Considere um AFD com `Σ = {0,1}`, `Q = {q0,q1}`, estado inicial `q0`, estado fi
 
 Identifique e explique:
 
-1. o alfabeto `Σ`;
-2. o conjunto de estados `Q`;
-3. o estado inicial;
-4. o conjunto de estados finais `F`;
-5. os símbolos que podem ser lidos;
-6. o significado do círculo duplo em um diagrama;
-7. o significado da seta sem origem apontando para um estado.
+
+1. o alfabeto `Σ`; Σ = {0, 1}. É o conjunto de símbolos que o autômato consegue ler, um de cada vez, ao processar uma cadeia de entrada. Nenhum outro símbolo é permitido nas transições.
+
+2. o conjunto de estados `Q`; Q = {q0, q1}. São todas as "situações" possíveis em que o autômato pode se encontrar durante o processamento da cadeia. O autômato está sempre em exatamente um estado a cada momento.
+
+3. o estado inicial; q0. É o estado em que o autômato sempre começa, antes de ler qualquer símbolo da cadeia de entrada.
+
+4. o conjunto de estados finais `F`; F = {q1}. É o subconjunto de Q que indica aceitação: se, depois de ler toda a cadeia, o autômato estiver em um estado pertencente a F, a cadeia é aceita; caso contrário, é rejeitada.
+
+5. os símbolos que podem ser lidos; Apenas os símbolos pertencentes a Σ, ou seja, 0 e 1 — são os únicos rótulos que aparecem nas transições da tabela δ.
+
+6. o significado do círculo duplo em um diagrama; Em um diagrama de estados, um círculo duplo representa um estado final (de aceitação). No nosso exemplo, q1 seria desenhado com círculo duplo.
+
+7. o significado da seta sem origem apontando para um estado. Uma seta que aponta para um estado mas não sai de nenhum outro estado indica o estado inicial do autômato. No nosso exemplo, essa seta apontaria para q0.
 
 ## Exercício 4 — A quíntupla do AFD
 
@@ -128,7 +135,15 @@ Complete:
 
 Explique por que esses cinco elementos são suficientes para definir o funcionamento de um AFD.
 
----
+Esses cinco componentes bastam porque, juntos, eles descrevem completamente e sem ambiguidade o comportamento do autômato:
+
+Σ diz o que pode ser lido.
+Q diz onde o autômato pode estar.
+δ diz como ele se move de um estado para outro.
+q0 diz por onde começar.
+F diz quando aceitar o resultado.
+
+Juntando tudo isso, é possível simular o autômato do início ao fim para qualquer cadeia: começa em q0, vai seguindo δ conforme lê cada símbolo, e no final só olha se parou em um estado de F. Não falta nenhuma informação  por isso os 5 elementos são suficientes.
 
 # Parte 3 — Tabela de transições e cadeias
 
