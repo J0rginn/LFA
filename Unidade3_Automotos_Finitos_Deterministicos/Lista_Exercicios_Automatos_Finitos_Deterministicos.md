@@ -184,7 +184,6 @@ Responda:
 - O estado de aceitação é q1 (pois F = {q1})
 
 6. Desenhe o diagrama correspondente à tabela.
-![Uploading image.png…]()
 
 7. Justifique por que o autômato é determinístico.
 
@@ -233,59 +232,6 @@ Construa um AFD sobre `Σ = {0,1}` que reconheça todas as cadeias que terminam 
 
 Entregue: conjunto de estados, alfabeto, estado inicial, estados finais, tabela, diagrama e teste de pelo menos cinco cadeias.
 
-### Definição formal
-
-`M = (Σ, Q, δ, q0, F)`
-
-- `Σ = {0, 1}`
-- `Q = {q0, q1}`
-- Estado inicial: `q0`
-- Estados finais: `F = {q1}`
-
-**Ideia:** `q0` representa "o último símbolo lido não foi 1 (ou ainda não li nada)"; `q1` representa "o último símbolo lido foi 1".
-
-### Tabela de transição δ
-
-| Estado      | 0    | 1    |
-|-------------|------|------|
-| **→ q0**    | q0   | q1   |
-| **q1** (final) | q0 | q1   |
-
-### Diagrama
-
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q0 : 0
-    q0 --> q1 : 1
-    q1 --> q0 : 0
-    q1 --> q1 : 1
-    q1 --> [*]
-```
-
-> q0 é o estado inicial. q1 é o único estado final (seta de saída para `[*]` indica aceitação).
-
-### Teste de cadeias
-
-| Cadeia  | Caminho de estados                          | Resultado |
-|---------|----------------------------------------------|-----------|
-| `1`     | q0 →¹ q1                                      | **Aceita** |
-| `01`    | q0 →⁰ q0 →¹ q1                                | **Aceita** |
-| `101`   | q0 →¹ q1 →⁰ q0 →¹ q1                          | **Aceita** |
-| `0001`  | q0 → q0 → q0 → q0 →¹ q1                       | **Aceita** |
-| `1101`  | q0 →¹ q1 →¹ q1 →⁰ q0 →¹ q1                    | **Aceita** |
-| `ε`     | fica em q0                                    | Rejeita |
-| `0`     | q0 →⁰ q0                                      | Rejeita |
-| `10`    | q0 →¹ q1 →⁰ q0                                | Rejeita |
-| `100`   | q0 → q1 → q0 → q0                             | Rejeita |
-| `1110`  | q0 → q1 → q1 → q1 →⁰ q0                       | Rejeita |
-
-Todas as cadeias aceitas terminam em `q1`; todas as rejeitadas terminam em `q0` — consistente com `F = {q1}`.
-
----
-
-
 ## Exercício 8 — Número par de símbolos `1`
 
 Construa um AFD sobre `Σ = {0,1}` que reconheça cadeias com quantidade par de símbolos `1`.
@@ -293,53 +239,6 @@ Construa um AFD sobre `Σ = {0,1}` que reconheça cadeias com quantidade par de 
 Analise: `ε`, `0`, `1`, `11`, `101`, `1100` e `10101`.
 
 Apresente a definição formal `M = (Σ, Q, δ, q0, F)`, a tabela, o diagrama e o processamento das cadeias. Lembre-se de que basta controlar duas situações: quantidade par ou ímpar de símbolos `1`.
-
-### Definição formal
-
-`M = (Σ, Q, δ, q0, F)`
-
-- `Σ = {0, 1}`
-- `Q = {q0, q1}`
-- Estado inicial: `q0`
-- Estados finais: `F = {q0}`
-
-**Ideia:** `q0` = "quantidade de 1's lidos até agora é par" (inclui zero); `q1` = "quantidade de 1's é ímpar". O símbolo `0` nunca muda a paridade; o símbolo `1` sempre alterna o estado.
-
-### Tabela de transição δ
-
-| Estado         | 0  | 1  |
-|----------------|----|----|
-| **→ q0** (final) | q0 | q1 |
-| **q1**         | q1 | q0 |
-
-### Diagrama
-
-```mermaid
-stateDiagram-v2
-    direction LR
-    [*] --> q0
-    q0 --> q0 : 0
-    q0 --> q1 : 1
-    q1 --> q1 : 0
-    q1 --> q0 : 1
-    q0 --> [*]
-```
-
-> q0 é o estado inicial **e** o único estado final (paridade par). q1 representa paridade ímpar.
-
-### Processamento das cadeias pedidas
-
-| Cadeia   | Caminho de estados                                | Nº de 1's | Resultado |
-|----------|-----------------------------------------------------|-----------|-----------|
-| `ε`      | permanece em q0                                     | 0 (par)   | **Aceita** |
-| `0`      | q0 →⁰ q0                                            | 0 (par)   | **Aceita** |
-| `1`      | q0 →¹ q1                                            | 1 (ímpar) | Rejeita |
-| `11`     | q0 →¹ q1 →¹ q0                                      | 2 (par)   | **Aceita** |
-| `101`    | q0 →¹ q1 →⁰ q1 →¹ q0                                | 2 (par)   | **Aceita** |
-| `1100`   | q0 →¹ q1 →¹ q0 →⁰ q0 →⁰ q0                          | 2 (par)   | **Aceita** |
-| `10101`  | q0 →¹ q1 →⁰ q1 →¹ q0 →⁰ q0 →¹ q1                    | 3 (ímpar) | Rejeita |
-
-Cada `1` alterna entre `q0` e `q1`. Como só `q0` é final, a cadeia é aceita exatamente quando o número total de `1`'s é par.
 
 ## Exercício 9 — Pelo menos dois zeros consecutivos
 
@@ -355,12 +254,70 @@ L(M) = {w ∈ {0,1}* | w possui pelo menos dois 0s consecutivos}
 Responda antes de construir:
 
 1. O que o estado inicial representa?
+ - Representa a situação em que, até agora, não vimos nenhum 0 "pendente" — ou seja, o último símbolo lido (se houver) não foi um 0 isolado que possa formar um par. É um estado de "busca começando do zero".
+ 
 2. O que ocorre quando aparece o primeiro `0`?
+ - Precisamos "lembrar" que vimos um 0, pois se o próximo símbolo também for 0, a cadeia deve ser aceita. Então vamos para um novo estado que significa: "vi um 0, aguardando para saber se vem outro".
+ 
 3. O que ocorre quando outro `0` aparece imediatamente depois?
+ - Encontramos 00 consecutivos — a condição da linguagem já foi satisfeita. Vamos para um estado de aceitação.
+ 
 4. Depois de encontrar `00`, a cadeia pode deixar de ser aceita?
+ - Não. Uma vez que os dois 0s consecutivos apareceram, nenhum símbolo futuro pode "desfazer" esse fato. Esse estado é uma armadilha de aceitação (absorve qualquer entrada futura, sempre aceitando).
+ 
 5. Quantos estados são necessários?
+ - Três: "nenhum 0 pendente", "um 0 pendente" e "já achei 00" (aceitação).
 
 Apresente a quíntupla, a tabela, o diagrama e os testes.
+
+M = (Q, Σ, δ, q₀, F)
+
+Q = {q₀, q₁, q₂}
+Σ = {0, 1}
+q₀ = estado inicial
+F = {q₂}
+δ definida na tabela abaixo
+
+| Estado          | 0  | 1  |
+|-----------------|----|----|
+| → q0            | q1 | q0 |
+| q1              | q2 | q0 |
+| **q2** (aceita) | q2 | q2 |
+
+- **q0**: nenhum `0` pendente
+- **q1**: último símbolo foi um `0` isolado
+- **q2**: já ocorreram `00` consecutivos (estado absorvente de aceitação)
+
+```
+                 0                 0
+        ┌───┐ ─────► ┌───┐ ─────► ((q2))
+   ───► │q0 │         │q1 │          │  ↺ 0,1
+        └───┘ ◄───────└───┘         (loop)
+          ↺ 1     1
+```
+
+- `→ q0`: estado inicial
+- `((q2))`: estado de aceitação (círculo duplo)
+- q0 possui laço em `1` (permanece em q0)
+- q1 volta para q0 em `1`
+- q2 possui laço em `0` e `1` (permanece em q2 para sempre)
+
+## Testes
+
+| Cadeia    | Caminho de estados                  | Resultado     |
+|-----------|--------------------------------------|---------------|
+| `00`      | q0→q1→q2                             | **Aceita** ✅ |
+| `001`     | q0→q1→q2→q2                          | **Aceita** ✅ |
+| `100`     | q0→q0→q1→q2                          | **Aceita** ✅ |
+| `1001`    | q0→q0→q1→q2→q2                       | **Aceita** ✅ |
+| `110011`  | q0→q0→q0→q1→q2→q2→q2                 | **Aceita** ✅ |
+| `0000`    | q0→q1→q2→q2→q2                       | **Aceita** ✅ |
+| `ε`       | q0                                   | Rejeita ❌    |
+| `0`       | q0→q1                                | Rejeita ❌    |
+| `1`       | q0→q0                                | Rejeita ❌    |
+| `01`      | q0→q1→q0                             | Rejeita ❌    |
+| `10`      | q0→q0→q1                             | Rejeita ❌    |
+| `10101`   | q0→q0→q1→q0→q1→q0                    | Rejeita ❌    |
 
 ---
 
@@ -375,6 +332,43 @@ Verde → Amarelo → Vermelho → Verde
 ```
 
 Entregue o diagrama, a tabela de transições, a definição formal e uma explicação do funcionamento. Discuta se há sentido em definir estados de aceitação nesse modelo e justifique a escolha adotada.
+
+## Tabela de transições
+
+| Estado atual | Entrada `tempo` |
+|--------------|------------------|
+| → Verde      | Amarelo          |
+| Amarelo      | Vermelho         |
+| Vermelho     | Verde            |
+
+## Diagrama de estados
+
+```
+        tempo        tempo
+ ───► (Verde) ───► (Amarelo) ───► (Vermelho)
+         ▲                              │
+         └──────────── tempo ───────────┘
+```
+
+## Definição formal
+
+M = (Q, Σ, δ, q₀, F)
+
+- Q = {Verde, Amarelo, Vermelho}
+- Σ = {tempo}
+- δ(Verde, tempo) = Amarelo
+- δ(Amarelo, tempo) = Vermelho
+- δ(Vermelho, tempo) = Verde
+- q₀ = Verde (estado inicial, convenção usual)
+- F = ∅ (ver discussão abaixo)
+
+- O autômato tem um único símbolo de entrada, `tempo`, que representa "passou o intervalo configurado para essa luz". A cada ocorrência desse símbolo, o semáforo avança para o próximo estado do ciclo. Como não há mais nenhum outro símbolo em Σ, a única coisa que o autômato pode fazer é percorrer o ciclo indefinidamente:
+
+```
+Verde → Amarelo → Vermelho → Verde → ...
+```
+
+Diferente do Exercício 9, aqui não existe uma cadeia "final" que o sistema processa e depois pára — o semáforo funciona continuamente, sem fim natural de entrada.
 
 ## Exercício 11 — Sistema de login
 
