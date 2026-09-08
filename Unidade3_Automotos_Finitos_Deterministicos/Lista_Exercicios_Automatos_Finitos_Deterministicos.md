@@ -184,6 +184,7 @@ Responda:
 - O estado de aceitação é q1 (pois F = {q1})
 
 6. Desenhe o diagrama correspondente à tabela.
+![Uploading image.png…]()
 
 7. Justifique por que o autômato é determinístico.
 
