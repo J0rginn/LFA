@@ -232,6 +232,59 @@ Construa um AFD sobre `Σ = {0,1}` que reconheça todas as cadeias que terminam 
 
 Entregue: conjunto de estados, alfabeto, estado inicial, estados finais, tabela, diagrama e teste de pelo menos cinco cadeias.
 
+### Definição formal
+
+`M = (Σ, Q, δ, q0, F)`
+
+- `Σ = {0, 1}`
+- `Q = {q0, q1}`
+- Estado inicial: `q0`
+- Estados finais: `F = {q1}`
+
+**Ideia:** `q0` representa "o último símbolo lido não foi 1 (ou ainda não li nada)"; `q1` representa "o último símbolo lido foi 1".
+
+### Tabela de transição δ
+
+| Estado      | 0    | 1    |
+|-------------|------|------|
+| **→ q0**    | q0   | q1   |
+| **q1** (final) | q0 | q1   |
+
+### Diagrama
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> q0
+    q0 --> q0 : 0
+    q0 --> q1 : 1
+    q1 --> q0 : 0
+    q1 --> q1 : 1
+    q1 --> [*]
+```
+
+> q0 é o estado inicial. q1 é o único estado final (seta de saída para `[*]` indica aceitação).
+
+### Teste de cadeias
+
+| Cadeia  | Caminho de estados                          | Resultado |
+|---------|----------------------------------------------|-----------|
+| `1`     | q0 →¹ q1                                      | **Aceita** |
+| `01`    | q0 →⁰ q0 →¹ q1                                | **Aceita** |
+| `101`   | q0 →¹ q1 →⁰ q0 →¹ q1                          | **Aceita** |
+| `0001`  | q0 → q0 → q0 → q0 →¹ q1                       | **Aceita** |
+| `1101`  | q0 →¹ q1 →¹ q1 →⁰ q0 →¹ q1                    | **Aceita** |
+| `ε`     | fica em q0                                    | Rejeita |
+| `0`     | q0 →⁰ q0                                      | Rejeita |
+| `10`    | q0 →¹ q1 →⁰ q0                                | Rejeita |
+| `100`   | q0 → q1 → q0 → q0                             | Rejeita |
+| `1110`  | q0 → q1 → q1 → q1 →⁰ q0                       | Rejeita |
+
+Todas as cadeias aceitas terminam em `q1`; todas as rejeitadas terminam em `q0` — consistente com `F = {q1}`.
+
+---
+
+
 ## Exercício 8 — Número par de símbolos `1`
 
 Construa um AFD sobre `Σ = {0,1}` que reconheça cadeias com quantidade par de símbolos `1`.
@@ -239,6 +292,53 @@ Construa um AFD sobre `Σ = {0,1}` que reconheça cadeias com quantidade par de 
 Analise: `ε`, `0`, `1`, `11`, `101`, `1100` e `10101`.
 
 Apresente a definição formal `M = (Σ, Q, δ, q0, F)`, a tabela, o diagrama e o processamento das cadeias. Lembre-se de que basta controlar duas situações: quantidade par ou ímpar de símbolos `1`.
+
+### Definição formal
+
+`M = (Σ, Q, δ, q0, F)`
+
+- `Σ = {0, 1}`
+- `Q = {q0, q1}`
+- Estado inicial: `q0`
+- Estados finais: `F = {q0}`
+
+**Ideia:** `q0` = "quantidade de 1's lidos até agora é par" (inclui zero); `q1` = "quantidade de 1's é ímpar". O símbolo `0` nunca muda a paridade; o símbolo `1` sempre alterna o estado.
+
+### Tabela de transição δ
+
+| Estado         | 0  | 1  |
+|----------------|----|----|
+| **→ q0** (final) | q0 | q1 |
+| **q1**         | q1 | q0 |
+
+### Diagrama
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> q0
+    q0 --> q0 : 0
+    q0 --> q1 : 1
+    q1 --> q1 : 0
+    q1 --> q0 : 1
+    q0 --> [*]
+```
+
+> q0 é o estado inicial **e** o único estado final (paridade par). q1 representa paridade ímpar.
+
+### Processamento das cadeias pedidas
+
+| Cadeia   | Caminho de estados                                | Nº de 1's | Resultado |
+|----------|-----------------------------------------------------|-----------|-----------|
+| `ε`      | permanece em q0                                     | 0 (par)   | **Aceita** |
+| `0`      | q0 →⁰ q0                                            | 0 (par)   | **Aceita** |
+| `1`      | q0 →¹ q1                                            | 1 (ímpar) | Rejeita |
+| `11`     | q0 →¹ q1 →¹ q0                                      | 2 (par)   | **Aceita** |
+| `101`    | q0 →¹ q1 →⁰ q1 →¹ q0                                | 2 (par)   | **Aceita** |
+| `1100`   | q0 →¹ q1 →¹ q0 →⁰ q0 →⁰ q0                          | 2 (par)   | **Aceita** |
+| `10101`  | q0 →¹ q1 →⁰ q1 →¹ q0 →⁰ q0 →¹ q1                    | 3 (ímpar) | Rejeita |
+
+Cada `1` alterna entre `q0` e `q1`. Como só `q0` é final, a cadeia é aceita exatamente quando o número total de `1`'s é par.
 
 ## Exercício 9 — Pelo menos dois zeros consecutivos
 
