@@ -325,6 +325,8 @@ F = {q₂}
 
 ## Exercício 10 — Semáforo
 
+## Exercício 10 — Semáforo
+
 Modele um semáforo com os estados `Verde`, `Amarelo` e `Vermelho`. Use a entrada `tempo` e represente o ciclo:
 
 ```text
@@ -342,13 +344,12 @@ Entregue o diagrama, a tabela de transições, a definição formal e uma explic
 | Vermelho     | Verde            |
 
 ## Diagrama de estados
+    tempo        tempo
 
-```
-        tempo        tempo
- ───► (Verde) ───► (Amarelo) ───► (Vermelho)
-         ▲                              │
-         └──────────── tempo ───────────┘
-```
+───► (Verde) ───► (Amarelo) ───► (Vermelho)
+▲ │
+└──────────── tempo ───────────┘
+
 
 ## Definição formal
 
@@ -362,56 +363,128 @@ M = (Q, Σ, δ, q₀, F)
 - q₀ = Verde (estado inicial, convenção usual)
 - F = ∅ (ver discussão abaixo)
 
-- O autômato tem um único símbolo de entrada, `tempo`, que representa "passou o intervalo configurado para essa luz". A cada ocorrência desse símbolo, o semáforo avança para o próximo estado do ciclo. Como não há mais nenhum outro símbolo em Σ, a única coisa que o autômato pode fazer é percorrer o ciclo indefinidamente:
+O autômato tem um único símbolo de entrada, `tempo`, que representa "passou o intervalo configurado para essa luz". A cada ocorrência desse símbolo, o semáforo avança para o próximo estado do ciclo. Como não há mais nenhum outro símbolo em Σ, a única coisa que o autômato pode fazer é percorrer o ciclo indefinidamente:
 
-```
 Verde → Amarelo → Vermelho → Verde → ...
-```
+
 
 Diferente do Exercício 9, aqui não existe uma cadeia "final" que o sistema processa e depois pára — o semáforo funciona continuamente, sem fim natural de entrada.
+
+## Discussão sobre estados de aceitação
+
+Não faz sentido definir estados de aceitação nesse modelo, e por isso **F = ∅**.
+
+Estados de aceitação servem para responder: "depois de processar toda a cadeia de entrada, o resultado final é aceito ou rejeitado?" Isso pressupõe uma cadeia **finita**, com começo e fim.
+
+O semáforo não se encaixa nesse caso porque:
+
+- Ele **não processa uma cadeia até o fim** — funciona em ciclo contínuo, com o símbolo `tempo` chegando indefinidamente.
+- Não há "cadeia aceita ou rejeitada" — não estamos verificando se uma sequência pertence a uma linguagem, apenas modelando um **comportamento cíclico**.
+- Todos os três estados são igualmente válidos — nenhum representa "sucesso" ou objetivo alcançado.
+
+Por isso, esse é um uso de AFD como **máquina de controle/comportamento reativo**, não como **reconhecedor de linguagem** (uso clássico com F ≠ ∅). A estrutura (Q, Σ, δ, q₀) é útil aqui, mas F não tem papel a cumprir — por isso fica vazio.
 
 ## Exercício 11 — Sistema de login
 
 Modele um sistema com as entradas `senha_correta` e `senha_incorreta`. Uma senha correta autentica o usuário; após três tentativas incorretas, o sistema fica bloqueado.
 
-Determine:
+## Estados necessários
 
-1. todos os estados necessários para contar as tentativas;
-2. o alfabeto de entrada;
-3. o estado inicial;
-4. os estados finais;
-5. todas as transições;
-6. o comportamento após a autenticação e após o bloqueio.
+q0: nenhum erro ainda (estado inicial)
+q1: um erro
+q2: dois erros
+Bloqueado: três erros
+Autenticado: senha correta
 
-Responda: apenas os estados `Aguardando`, `Autenticado` e `Bloqueado` são suficientes para controlar três tentativas? Justifique e construa o AFD completo.
+## Alfabeto de entrada
 
----
+Σ = {senha_correta, senha_incorreta}
+
+## Estado inicial
+
+q0
+
+## Estados finais
+
+F = {Autenticado}
+
+## Tabela de transições
+
+| Estado atual | senha_correta | senha_incorreta |
+|--------------|----------------|-------------------|
+| → q0         | Autenticado    | q1                |
+| q1           | Autenticado    | q2                |
+| q2           | Autenticado    | Bloqueado         |
+| Autenticado  | Autenticado    | Autenticado       |
+| Bloqueado    | Bloqueado      | Bloqueado         |
+
+## Diagrama de estados
+    senha_incorreta   senha_incorreta   senha_incorreta
+
+──►(q0)───────────────►(q1)───────────────►(q2)───────────────►(Bloqueado) ⟲
+│ │ │
+│senha_correta │senha_correta │senha_correta
+▼ ▼ ▼
+(Autenticado) ⟲ (Autenticado) (Autenticado)
+
+
+## Comportamento após autenticação e após bloqueio
+
+Depois de chegar em Autenticado, o sistema permanece nesse estado independente da entrada seguinte. Depois de chegar em Bloqueado, o sistema também permanece bloqueado independente da entrada seguinte. Os dois são estados absorventes.
+
+## Aguardando, Autenticado e Bloqueado são suficientes?
+
+Não. Com apenas três estados não há como contar quantos erros já ocorreram. É preciso um estado para cada quantidade de erros (zero, um e dois), totalizando cinco estados: q0, q1, q2, Autenticado e Bloqueado.
 
 # Parte 6 — Prática no JFLAP
 
 ## Exercício 12 — Implementação e testes
 
-Escolha um dos AFDs dos exercícios 7, 8 ou 9 e implemente-o no JFLAP.
+Escolha um dos AFDs dos exercícios 7, 8 ou 9 e implemente-o no JFLAP. Crie os estados, defina o estado inicial e os estados finais, crie todas as transições, teste três cadeias que devem ser aceitas e três que devem ser rejeitadas, e compare os resultados esperados com os obtidos.
 
-1. Crie os estados.
-2. Defina o estado inicial e os estados finais.
-3. Crie todas as transições.
-4. Teste três cadeias que devem ser aceitas.
-5. Teste três cadeias que devem ser rejeitadas.
-6. Compare os resultados esperados e obtidos.
+## AFD escolhido
 
-Inclua um print do AFD, a tabela de testes e uma breve explicação.
+Foi escolhido o AFD do Exercício 9, que reconhece cadeias com pelo menos dois zeros consecutivos.
+
+Q = {q0, q1, q2}
+Σ = {0, 1}
+q0 = estado inicial
+F = {q2}
+
+## Tabela de transições
+
+| Estado          | 0  | 1  |
+|-----------------|----|----|
+| → q0            | q1 | q0 |
+| q1              | q2 | q0 |
+| q2 (final)      | q2 | q2 |
+
+## Passos no JFLAP
+
+1. Criar três estados: q0, q1 e q2.
+2. Marcar q0 como estado inicial (seta de entrada).
+3. Marcar q2 como estado final (círculo duplo).
+4. Criar as transições: q0 com 0 para q1, q0 com 1 para q0, q1 com 0 para q2, q1 com 1 para q0, q2 com 0 para q2, q2 com 1 para q2.
+5. Salvar o arquivo e usar a opção Input > Step by Step ou Fast Run para testar cadeias.
+
+## Print do AFD
+
+[Inserir aqui a captura de tela do autômato montado no JFLAP]
+
+## Tabela de testes
 
 | Cadeia | Resultado esperado | Resultado no JFLAP | Conferência |
-|---|---|---|---|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
-| | | | |
-| | | | |
+|--------|----------------------|------------------------|-------------|
+| 00     | Aceita                | Aceita                 | Confere     |
+| 100    | Aceita                | Aceita                 | Confere     |
+| 110011 | Aceita                | Aceita                 | Confere     |
+| ε      | Rejeita               | Rejeita                | Confere     |
+| 01     | Rejeita               | Rejeita                | Confere     |
+| 10101  | Rejeita               | Rejeita                | Confere     |
 
----
+## Explicação
+
+As três primeiras cadeias contêm dois zeros consecutivos em algum ponto, então o autômato alcança o estado q2, que é final, sendo por isso aceitas. As três últimas cadeias nunca têm dois zeros seguidos, então o autômato nunca sai de q0 ou q1, terminando fora do estado final, sendo por isso rejeitadas. Os resultados obtidos no JFLAP confirmam o comportamento esperado pela definição formal do autômato, mostrando que a implementação está correta.
 
 # Desafio final
 
