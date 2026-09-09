@@ -1,1 +1,32 @@
+Exercício guiado
+
+1. Sobre {0,1}, descreva palavras que terminam em 00
+2. Sobre {a,b}, descreva palavras com exatamente dois a
+3. Crie um identificador com duas maiúsculas, três algarismos e uma minúscula opcional
+Registre a linguagem, exemplos aceitos, rejeitados e sua Regex
+
+Desafio: matrícula acadêmica
+
+Formato: CURSO-ANO-NÚMERO-TURNO
+CURSO: CCO, ESW ou SIS
+ANO: 2024 a 2029
+NÚMERO: exatamente quatro algarismos
+TURNO: M, T ou N
+Use hífens entre os blocos e não permita caracteres extras
+
+Atividade no Regex Learn
+
+Construa a expressão a partir das regras
+Teste todos os exemplos válidos e inválidos
+Crie casos de fronteira e entradas quase corretas
+Quando um teste falhar, identifique a regra mal representada
+Entregue a Regex, a tabela de testes e a justificativa
+
+Questões para reflexão
+
+Toda expressão regular formal representa uma linguagem regular?
+Toda linguagem regular possui uma expressão regular?
+Como uma Regex se relaciona com DFA e NFA?
+Quais extensões de motores não pertencem à definição clássica?
+Por que {aⁿbⁿ | n ≥ 0} não pode ser reconhecida por um DFA?
 
