@@ -488,67 +488,88 @@ As três primeiras cadeias contêm dois zeros consecutivos em algum ponto, entã
 
 # Desafio final
 
-## Exercício 13 — Crie seu próprio problema
-
-Escolha uma situação real representável por estados, como elevador, máquina de vendas, controle de acesso, estacionamento, pedido de delivery, semáforo, porta eletrônica ou protocolo de comunicação.
-
-O grupo deverá:
-
-1. descrever o problema e suas regras;
-2. identificar as entradas e os estados;
-3. definir o estado inicial e os estados finais;
-4. criar a tabela de transições;
-5. desenhar o AFD;
-6. apresentar `M = (Σ, Q, δ, q0, F)`;
-7. testar pelo menos cinco sequências de entrada;
-8. explicar por que o modelo é determinístico;
-9. apresentar uma conclusão sobre o que foi aprendido.
-
----
-
-# Entregável
-
-O grupo deverá entregar um único arquivo `README.md`, contendo:
-
-- identificação do grupo;
-- respostas dos exercícios indicados pela professora;
-- diagramas e tabelas de transição;
-- processamento estado por estado das cadeias;
-- evidência dos testes no JFLAP;
-- conclusão do grupo.
-
-## Modelo para o desafio final
-
-```markdown
 ## Desafio final
+
+### Identificação do grupo
+
+[Preencher com os nomes dos integrantes do grupo]
 
 ### Problema escolhido
 
+Modelagem de uma catraca eletrônica de acesso, como as usadas em metrôs e estádios. A catraca pode estar trancada ou destrancada. Ao inserir uma moeda ou ficha, ela destranca, permitindo a passagem de uma pessoa. Ao empurrar a catraca, ela deixa a pessoa passar (se estiver destrancada) e volta a travar em seguida, ou simplesmente não gira (se já estiver trancada).
+
 ### Estados e significado
+
+Trancada: estado inicial, a catraca está bloqueada e não permite passagem.
+Destrancada: a catraca foi liberada por uma moeda e permite a passagem de uma pessoa.
 
 ### Alfabeto
 
+Σ = {moeda, empurrar}
+
+moeda: representa a inserção de uma ficha ou pagamento.
+empurrar: representa a tentativa de girar a catraca para passar.
+
 ### Estado inicial e estados finais
+
+Estado inicial: Trancada
+
+Para esse modelo, não existe uma cadeia com fim definido a ser aceita ou rejeitada, já que a catraca funciona continuamente. Por isso, não há sentido em definir um conjunto de estados finais, sendo F = ∅, seguindo o mesmo raciocínio usado no Exercício 10 (semáforo).
 
 ### Tabela de transições
 
+| Estado atual | moeda       | empurrar    |
+|--------------|-------------|-------------|
+| → Trancada   | Destrancada | Trancada    |
+| Destrancada  | Destrancada | Trancada    |
+
 ### Diagrama
+            moeda
+    ┌─────────────────┐
+    │                  ▼
+
+───►(Trancada) (Destrancada)
+▲ │
+│ empurrar │
+└──────────────────┘
+
+Trancada tem laço em "empurrar" (permanece trancada)
+Destrancada tem laço em "moeda" (permanece destrancada)
+
 
 ### Definição formal
+
 M = (Σ, Q, δ, q0, F)
 
+Σ = {moeda, empurrar}
+Q = {Trancada, Destrancada}
+δ(Trancada, moeda) = Destrancada
+δ(Trancada, empurrar) = Trancada
+δ(Destrancada, moeda) = Destrancada
+δ(Destrancada, empurrar) = Trancada
+q0 = Trancada
+F = ∅
+
 ### Testes realizados
-| Entrada | Resultado esperado | Resultado obtido |
-|---|---|---|
-| | | |
+
+| Entrada                        | Resultado esperado        | Resultado obtido           |
+|---------------------------------|-----------------------------|------------------------------|
+| moeda                            | Destrancada                 | Destrancada                  |
+| empurrar                         | Trancada (sem moeda antes)  | Trancada                     |
+| moeda, empurrar                  | Trancada (passou e travou)  | Trancada                     |
+| moeda, moeda, empurrar           | Trancada                    | Trancada                     |
+| empurrar, moeda, empurrar        | Trancada                    | Trancada                     |
+
+Processamento estado por estado da sequência moeda, empurrar:
+Trancada --moeda--> Destrancada --empurrar--> Trancada
+
+Processamento estado por estado da sequência moeda, moeda, empurrar:
+Trancada --moeda--> Destrancada --moeda--> Destrancada --empurrar--> Trancada
 
 ### Evidência no JFLAP
 
+[Inserir aqui a captura de tela do autômato montado no JFLAP e dos testes realizados]
+
 ### Conclusão
-```
 
-> **Importante:** não basta apresentar o diagrama. Demonstre como o AFD processa cada cadeia, estado por estado, até decidir pela aceitação ou rejeição.
-
----
-
-**Profa. Kadidja Valéria**
+Esse desafio mostrou que nem todo sistema modelado como AFD precisa ter estados de aceitação, pois alguns representam comportamentos contínuos e reativos, como catracas e semáforos, em vez de reconhecedores de linguagem. Também ficou claro que o determinismo do modelo depende de existir exatamente uma transição definida para cada par de estado e símbolo de entrada, o que garante que o comportamento da catraca seja sempre previsível: para qualquer estado atual e qualquer entrada recebida, existe um único próximo estado possível, sem ambiguidade.
