@@ -1,10 +1,25 @@
 Exercício guiado
 
 1. Sobre {0,1}, descreva palavras que terminam em 00
+- Linguagem: cadeias que terminam com "00"
+
+Regex: (0|1)*00
+
+Aceitas: 00, 100, 1100, 0000
+Rejeitadas: 0, 01, 10, 001
 2. Sobre {a,b}, descreva palavras com exatamente dois a
+- Linguagem: cadeias com exatamente dois símbolos "a" (b's livres em qualquer posição)
+
+Regex: b*ab*ab*
+
+Aceitas: aa, aba, baab, bbabab
+Rejeitadas: a, aaa, b, aabaa
 3. Crie um identificador com duas maiúsculas, três algarismos e uma minúscula opcional
 Registre a linguagem, exemplos aceitos, rejeitados e sua Regex
+Regex: [A-Z][A-Z][0-9][0-9][0-9][a-z]?
 
+Aceitas: AB123, XY000z, MN999a
+Rejeitadas: A123, AB12, ab123, AB1234
 Desafio: matrícula acadêmica
 
 Formato: CURSO-ANO-NÚMERO-TURNO
