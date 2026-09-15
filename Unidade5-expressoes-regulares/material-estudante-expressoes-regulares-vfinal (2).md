@@ -557,27 +557,87 @@ Use o [Regex Learn Playground](https://regexlearn.com/playground) para testar a 
 ## Procedimento
 
 1. Escreva a Regex com base nos blocos da especificação.
+   
+```
+^(CCO|ESW|SIS)-202[4-9]-\d{4}-[MTN]$
+```
+
 2. Insira todos os exemplos que devem ser aceitos.
+
+CCO-2024-0001-M
+ESW-2026-1042-N
+SIS-2029-9999-T
+CCO-2027-0100-N
+ESW-2025-4321-M
+
 3. Insira todos os exemplos que devem ser rejeitados.
+
+ADS-2026-0001-N
+CCO-2030-0001-M
+SIS-2027-123-N
+esw-2026-1042-N
+CCO/2026/0001/M
+CCO-2026-0001-X
+
 4. Crie pelo menos quatro novos casos de teste:
    - um válido em cada limite de ano (`2024` e `2029`);
+
+    2024 -> CCO-2024-0001-M
+  
+    2029 ->SIS-2029-9999-N
+     
    - um inválido “quase correto”;
+
+    CCO-2026-0001-m
+
    - um inválido com caracteres extras.
-5. Se houver resultado incorreto, identifique qual regra foi representada inadequadamente e corrija a expressão.
-6. Entregue a Regex, a tabela de testes e uma justificativa por blocos.
+
+    ESW-2026-1042-N!
+   
+4. Se houver resultado incorreto, identifique qual regra foi representada inadequadamente e corrija a expressão.
+
+Não houve resultado incorreto.
+
+5. Entregue a Regex, a tabela de testes e uma justificativa por blocos.
+
+Regex Final
+^(CCO|ESW|SIS)-202[4-9]-\d{4}-[MTN]$
 
 ## Registro dos testes
 
-| Entrada | Esperado | Obtido | Regra verificada |
-|---|---|---|---|
-| `CCO-2024-0001-M` | aceita |  | curso, limite inferior e formato |
-| `ESW-2026-1042-N` | aceita |  | formato geral |
-| `ADS-2026-0001-N` | rejeita |  | curso |
-| `CCO-2030-0001-M` | rejeita |  | ano |
-| caso criado 1 |  |  |  |
-| caso criado 2 |  |  |  |
-| caso criado 3 |  |  |  |
-| caso criado 4 |  |  |  |
+| # | Cadeia | Esperado | Resultado no playground | Regra testada |
+|---|---|---|---|---|
+| 1 | `CCO-2024-0001-M` | Aceita |  Aceita | caso base |
+| 2 | `ESW-2026-1042-N` | Aceita |  Aceita | curso ESW |
+| 3 | `SIS-2029-9999-T` | Aceita |  Aceita | curso SIS, limite superior de ano |
+| 4 | `CCO-2027-0100-N` | Aceita |  Aceita | número com zero à esquerda |
+| 5 | `ESW-2025-4321-M` | Aceita |  Aceita | caso geral |
+| 6 | `ADS-2026-0001-N` | Rejeita |  Rejeita | curso inexistente (regra 1) |
+| 7 | `CCO-2030-0001-M` | Rejeita |  Rejeita | ano fora do intervalo (regra 3) |
+| 8 | `SIS-2027-123-N` | Rejeita |  Rejeita | número com 3 dígitos (regra 5) |
+| 9 | `esw-2026-1042-N` | Rejeita |  Rejeita | minúsculas no curso (regra 1) |
+| 10 | `CCO/2026/0001/M` | Rejeita |  Rejeita | separador incorreto (regras 2/4/6) |
+| 11 | `CCO-2026-0001-X` | Rejeita |  Rejeita | turno inexistente (regra 7) |
+| 12 | `CCO-2024-0001-M` | Aceita |  Aceita | limite inferior do intervalo de ano |
+| 13 | `SIS-2029-9999-N` | Aceita |  Aceita | limite superior do intervalo de ano |
+| 14 | `CCO-2026-0001-m` | Rejeita |  Rejeita | "quase correto" — turno em minúscula |
+| 15 | `ESW-2026-1042-N!` | Rejeita |  Rejeita | caractere extra ao final |
+
+
+## Justificativa por blocos 
+
+| Bloco da regex | Regra que implementa | Evidência nos testes |
+|---|---|---|
+| `^` | início obrigatório, sem prefixo | caso 15 (mesmo sem sufixo extra no início testado, a âncora simétrica garante isso) |
+| `(CCO\|ESW\|SIS)` | regra 1 — curso válido | casos 6 e 9 confirmam rejeição de curso inexistente e minúsculas |
+| `-` (×3) | regras 2, 4, 6 — hífens literais | caso 10 confirma rejeição de `/` como separador |
+| `202[4-9]` | regra 3 — ano entre 2024 e 2029 | casos 7, 12 e 13 confirmam o intervalo exato nas duas pontas |
+| `\d{4}` | regra 5 — exatamente 4 dígitos | caso 8 confirma rejeição de número com 3 dígitos |
+| `[MTN]` | regra 7 — turno válido, maiúsculo | casos 11 e 14 confirmam rejeição de turno inválido e de minúscula |
+| `$` | regra 8 — nenhuma parte extra | caso 15 confirma rejeição de sufixo extra |
+
+A expressão passou em todos os 15 casos sem ajustes, o que dá evidência de que cada regra do enunciado está mapeada para exatamente uma parte da regex, sem sobras nem lacunas.
+
 
 ## Critérios de avaliação — 0,5 ponto
 
