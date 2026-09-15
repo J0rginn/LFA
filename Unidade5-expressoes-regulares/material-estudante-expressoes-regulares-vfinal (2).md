@@ -7,7 +7,7 @@
 **Profª:** Kadidja Valéria  
 **Duração sugerida:** 1h30  
 **Modalidade:** aula teórico-prática  
-**Atividade avaliativa:** reconhecimento e construção de padrões — **0,5 ponto**
+**Atividade avaliativa:** reconhecimento e construção de padrões — **0,5 ponto**.
 
 ---
 
