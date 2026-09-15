@@ -496,38 +496,55 @@ L=\{c\texttt{-}a\texttt{-}d_1d_2d_3d_4\texttt{-}t
 
 ## Produção do estudante
 
-**Regex:**  
-__________________________________________________________________  
-__________________________________________________________________
+**Regex:**
+`^(CCO|ESW|SIS)-202[4-9]-[0-9]{4}-[MTN]$`
 
-**Justificativa por blocos:**  
-__________________________________________________________________  
-__________________________________________________________________
+**Justificativa por blocos:**
+o curso fica entre parenteses com | pq só pode ser um dos 3 (CCO, ESW ou SIS). depois o hifen normal. no ano eu percebi que 2024 até 2029 todos começam com 202, só o ultimo numero muda, entao fixei "202" e deixei [4-9] pra pegar de 4 a 9 (assim não aceita 2030 nem 2023). o numero tem que ter exatamente 4 digitos entao usei [0-9]{4}, se fosse só + ia aceitar qualquer quantidade de digito. no final o turno é só uma letra entre M, T ou N. e coloquei ^ no começo e $ no final pra nao deixar passar nada estranho antes ou depois tipo espaço ou letra a mais.
 
-**Dois novos casos válidos:**  
-1. ______________________________  
-2. ______________________________
+**Dois novos casos válidos:**
+1. SIS-2028-0007-T
+2. ESW-2024-9999-N
 
-**Dois novos casos inválidos e motivo:**  
-1. ______________________________  
-2. ______________________________
+**Dois novos casos inválidos e motivo:**
+1. CCO-2024-00001-M → tem 5 digitos no numero, era pra ter só 4
+2. CCO-2024-0001-m → o turno tá minusculo, e a regra só aceita M, T, N maiusculo
 
 ## Perguntas para justificar
 
 1. Qual subexpressão representa a escolha entre cursos?
+a parte `(CCO|ESW|SIS)`, o | serve pra dizer "ou", entao só um desses 3 precisa bater.
+
 2. Como o intervalo de anos foi limitado sem aceitar `2030`?
+deixei "202" fixo e só o ultimo numero varia com [4-9]. como 2030 começa com 203 e nao 202, ele já nem entra no padrao.
+
 3. Por que `{4}` é diferente de `+` no bloco numérico?
+{4} obriga ter exatamente 4 digitos. o + deixaria aceitar qualquer quantidade (1, 2, 10 digitos), entao nao ia bater com a regra que pede numero de 4 digitos certinho.
+
 4. Qual é a função das âncoras?
+^ e $ garantem que a string toda segue o padrao, do começo ao fim, sem deixar passar texto extra antes ou depois.
+
 5. Sua expressão aceita alguma cadeia que viola as regras? Como os testes sustentam a resposta?
+testando os exemplos que a atividade deu (os validos e os invalidos) e mais uns que eu criei, nenhum caso quebrou a regra. entao pelos testes que fiz ela parece certa, mas obviamente testar alguns casos nao é a mesma coisa que provar que ta 100% certo.
 
 ## Desafio extra — DFA equivalente
 
-Modele um DFA para a linguagem. Para reduzir o desenho, você pode rotular transições por classes, como `[0-9]`, mas deve indicar um **estado sumidouro** para qualquer símbolo inválido. Explique:
+pra nao ficar gigante eu uso classe tipo [0-9] em vez de desenhar cada digito separado, e qualquer simbolo que nao bate vai pro estado sumidouro (q_erro).
 
-- quais estados representam o progresso entre os blocos;
-- onde ocorrem as ramificações de curso, ano e turno;
-- qual é o único estado de aceitação;
-- por que caracteres adicionais levam à rejeição.
+estados e o que eles fazem:
+- q0: começo, ainda vai ler o curso
+- vai ramificando conforme lê C, E ou S (pra CCO, ESW, SIS) até chegar num estado comum depois de terminar o curso
+- depois do curso tem que vir um hifen, senão cai no sumidouro
+- ai vem os 3 digitos fixos "202" (sem ramificar, só 1 caminho)
+- no 4º digito do ano é que ramifica de verdade, indo pra [4-9], qualquer outro digito vai pro sumidouro
+- outro hifen
+- 4 estados seguidos só pra contar os 4 digitos do numero (cada um lendo [0-9])
+- outro hifen
+- no turno ramifica entre M, T ou N, e todos os 3 caem no mesmo estado final
+
+estado de aceitação: só tem um, é o ultimo depois do turno certo.
+
+por que caractere extra rejeita: o estado de aceitação nao tem pra onde ir se vier mais alguma coisa depois, entao qualquer coisa a mais joga pro sumidouro (isso faz o mesmo papel do $ da regex). e o sumidouro é tipo uma prisao, uma vez que entra não sai mais, fica preso ali pro resto da cadeia.
 
 ---
 
