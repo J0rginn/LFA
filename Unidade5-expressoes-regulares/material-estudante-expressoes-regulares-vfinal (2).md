@@ -139,7 +139,7 @@ L(r|s)&=L(r)\cup L(s), & L(rs)&=L(r)L(s), & L(r^*)&=L(r)^*.
 \end{aligned}
 \]
 
-## 3.3 Primeiros exemplos
+## 3.3 Os Primeiros exemplos
 
 | Expressão | Linguagem representada | Aceitas | Rejeitadas |
 |---|---|---|---|
