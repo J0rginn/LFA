@@ -1,4 +1,4 @@
-Exercício guiado
+Exercício guiado.
 
 1. Sobre {0,1}, descreva palavras que terminam em 00
 - Linguagem: cadeias que terminam com "00"
